@@ -23,8 +23,12 @@
   const rangeOutput = document.getElementById('rangeValue');
 
   // Set initial value
-  rangeOutput.textContent = rangeInput.value;
+  if (rangeInput && rangeOutput) {
+    // Set initial value
+    rangeOutput.textContent = rangeInput.value;
+    rangeInput.addEventListener('input', function() {
+      rangeOutput.textContent = this.value;
+    });
+  }
 
-  rangeInput.addEventListener('input', function() {
-    rangeOutput.textContent = this.value;
-  });
+  

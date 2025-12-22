@@ -18,6 +18,7 @@ const sessionOptions = {
 
 app.use(session(sessionOptions))
 app.use(flash())
+app.use(express.urlencoded({ extended: true }))
 
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash("success")

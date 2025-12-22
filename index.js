@@ -12,14 +12,14 @@ const port = 8090;
 const listings = require("./routes/listing.js")
 const reviews = require("./routes/review.js")
 const session = require("express-session")
-
+const flash = require("connect-flash");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname, "/public")))
+
 
 // mongoose.connect(process.env.MONGODB_URI)
 //   .then(() => console.log("MongoDB Atlas connected"))
@@ -37,22 +37,38 @@ main()
     .catch(err => { console.log(err) });
 
 
-app.use("/listings", listings)
-app.use("/listings/:id/reviews", reviews)
+
 
 const sessionOptions = {
     secret: "MySuperSecretCode",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+    }
 }
 
-app.use(session(sessionOptions))
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+})
 
 //root
 app.get("/", (req, res) => {
     res.redirect("/listings");
-
 })
+
+app.use(express.static(path.join(__dirname, "/public")));
+
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
+
 
 //err handler
 app.use((req, res, next) => {
