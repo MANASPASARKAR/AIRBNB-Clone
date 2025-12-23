@@ -1,24 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
-const { listingSchema } = require("../schema.js");
-const ExpressError = require("../utils/ExpressError.js")
+
 const Listing = require("../models/listing.js");
-// const session = require("express-session")
-// const flash = require("connect-flash");
+const { isLoggedin, isOwner, validateListing } = require("../middleware.js");
 
 
-const { isLoggedin } = require("../middleware.js");
-const validateListing = (req, res, next) => {
-    let { error } = listingSchema.validate(req.body);
 
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-}
 
 // app.use(flash());
 
@@ -53,7 +41,7 @@ router.post("/", isLoggedin, validateListing, wrapAsync(async (req, res, next) =
 router.get("/:id", wrapAsync(async (req, res) => {
 
     let { id } = req.params;
-    let detailListing = await Listing.findById(id).populate("reviews").populate("owner");
+    let detailListing = await Listing.findById(id).populate({path: "reviews", populate: {path: "author"}}).populate("owner");
     if (!detailListing) {
         req.flash("error", "Listing not found");
         return res.redirect("/listings");
@@ -64,7 +52,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
 
 
 //edit route
-router.get("/:id/edit", isLoggedin,wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedin, isOwner, wrapAsync(async (req, res) => {
 
     let { id } = req.params;
     let editListing = await Listing.findById(id);
@@ -75,7 +63,7 @@ router.get("/:id/edit", isLoggedin,wrapAsync(async (req, res) => {
     res.render("listings/edit.ejs", { editListing });
 }));
 
-router.put("/:id", isLoggedin, validateListing, wrapAsync(async (req, res) => {
+router.put("/:id", isLoggedin, isOwner, validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, { ...req.body }) // destructure
     req.flash("success", "Listing updated");
@@ -83,7 +71,7 @@ router.put("/:id", isLoggedin, validateListing, wrapAsync(async (req, res) => {
 }));
 
 //delete route
-router.delete("/:id", isLoggedin, wrapAsync(async (req, res) => {
+router.delete("/:id", isLoggedin, isOwner, wrapAsync(async (req, res) => {
 
     let { id } = req.params;
     req.flash("success", "Listing deleted");
