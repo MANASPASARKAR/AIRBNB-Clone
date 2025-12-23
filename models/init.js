@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const listing = require("./listing.js")
 
 
@@ -365,6 +365,9 @@ const sampleListings = [
 
 async function init(){
   await listing.deleteMany({});
+  sampleListings.forEach(listing => {
+    listing.owner = "69493b0696149e5e6b414055";
+  })
   await listing.insertMany(sampleListings);
 }
 

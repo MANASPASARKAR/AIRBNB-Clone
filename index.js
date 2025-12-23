@@ -9,17 +9,26 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js")
 const port = 8090;
-const listings = require("./routes/listing.js")
-const reviews = require("./routes/review.js")
+
 const session = require("express-session")
 const flash = require("connect-flash");
+
+
+const userRouter = require("./routes/user.js");
+const listingRouter = require("./routes/listing.js")
+const reviewRouter = require("./routes/review.js")
+
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-
+app.use(express.static(path.join(__dirname, "/public")));
 
 // mongoose.connect(process.env.MONGODB_URI)
 //   .then(() => console.log("MongoDB Atlas connected"))
@@ -53,9 +62,18 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currentUser = req.user;
     next();
 })
 
@@ -64,11 +82,20 @@ app.get("/", (req, res) => {
     res.redirect("/listings");
 })
 
-app.use(express.static(path.join(__dirname, "/public")));
+// app.get("/demoUser", async (req, res) => {
+//     let fakeUser = new User({
+//         username: "demoUser",
+//         email: "demoUser@gmail.com"
+//     });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+//     let regUser = await User.register(fakeUser, "password");
+//     res.send(regUser);
+// })
 
+
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 //err handler
 app.use((req, res, next) => {
