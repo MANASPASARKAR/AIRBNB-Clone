@@ -134,3 +134,12 @@ body{
 #reviewStar{
     color: rgb(255, 215, 0) !important;
 }
+
+/* map */
+
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+

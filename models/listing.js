@@ -48,7 +48,7 @@ const listingSchema = new mongoose.Schema({
 
     reviews: [
         {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Review",
         }
     ],
@@ -56,14 +56,27 @@ const listingSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+
+    geometry: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],   // [lng, lat]
+            required: true
+        }
     }
+
 
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
     if (!listing) return;
 
-    await Review.deleteMany({_id: {$in: listing.reviews}}); 
+    await Review.deleteMany({ _id: { $in: listing.reviews } });
     console.log("listing reviews deleted");
 })
 

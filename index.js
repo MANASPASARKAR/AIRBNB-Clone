@@ -1,5 +1,5 @@
-if(process.env.NODE_ENV !== "production"){
-    require("dotenv").config(); 
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
 }
 
 
@@ -26,6 +26,13 @@ const reviewRouter = require("./routes/review.js")
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.engine('ejs', ejsMate);
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -78,6 +85,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currentUser = req.user;
+    res.locals.MAP_API_KEY = process.env.MAP_API_KEY;
     next();
 })
 
