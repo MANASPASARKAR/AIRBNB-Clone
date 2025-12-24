@@ -1,4 +1,7 @@
-// require("dotenv").config();
+if(process.env.NODE_ENV !== "production"){
+    require("dotenv").config(); 
+}
+
 
 
 const express = require("express");
@@ -9,6 +12,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js")
 const port = 8090;
+
 
 const session = require("express-session")
 const flash = require("connect-flash");

@@ -7,7 +7,8 @@
                 <h3 style="margin-top: 16px !important; margin-bottom: 16px;">Make a new Listing</h3>
                 <hr>
 
-                <form method="post" action="/listings" novalidate class="needs-validation">
+                <form method="post" action="/listings" novalidate class="needs-validation"
+                    enctype="multipart/form-data">
                     <div class="mb-3 mt-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="title" placeholder="Enter Listing title" class="form-control" required>
@@ -32,9 +33,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image url</label>
-                        <input type="text" name="image[url]" placeholder="Enter the Image Url/link"
-                            class="form-control">
+                        <label for="image" class="form-label"> Upload Listing Image</label>
+                        <input type="file" name="listing[image]" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
