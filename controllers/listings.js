@@ -53,7 +53,10 @@ module.exports.editListingForm = async (req, res) => {
         req.flash("error", "Listing not found");
         return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { editListing });
+
+    let origImage = editListing.image.url;
+    origImage = origImage.replace("/upload", "/upload/w_250");
+    res.render("listings/edit.ejs", { editListing, origImage });
 }
 
 module.exports.putEditedListing = async (req, res) => {

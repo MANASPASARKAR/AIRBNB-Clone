@@ -26,6 +26,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <h6>Current Image</h6>
+                        <img src="<%= origImage %>" alt="<%= editListing.image.filename %>">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="image-url" class="form-label">Change Image</label>
                         <input type="file" name="listing[image]" class="form-control">
                         <div class="invalid-feedback">
