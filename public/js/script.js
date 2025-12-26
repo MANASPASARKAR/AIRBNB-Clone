@@ -31,4 +31,12 @@
     });
   }
 
+  let taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("click", function() {
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            info.style.display = taxSwitch.checked ? "inline" : "none";
+        }
+    })
+
   

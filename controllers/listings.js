@@ -9,6 +9,41 @@ module.exports.index = async (req, res) => {
 
 }
 
+//filter listings
+module.exports.filterListings = async (req, res) => {
+    let filterCat = req.query.category;
+    let allListings = await Listing.find({ category: filterCat });
+    if (allListings.length === 0) {
+        req.flash("error", "No listings found for the given category right now! Please try other categories");
+        return res.redirect("/listings");
+    }
+    else {
+        res.render("listings/index.ejs", { allListings });
+    }
+}
+
+//search
+module.exports.searchListings = async (req, res, next) => {
+    let searchQuery = req.query.q;
+
+    if (!searchQuery) {
+        return res.redirect("/listings");
+    }
+
+    let allListings = await Listing.find({
+        $text: { $search: searchQuery }
+    })
+
+    if (allListings.length === 0) {
+        req.flash("error", "No listings found for the given search");
+        return res.redirect("/listings");
+    }
+
+    else {
+        res.render("listings/index.ejs", { allListings });
+    }
+}
+
 
 //new listing
 module.exports.newListingForm = (req, res) => {
@@ -36,10 +71,12 @@ module.exports.postListing = async (req, res, next) => {
 
     newListing.owner = req.user._id;
     await newListing.save();
-    console.log("saved to db successfully");
+    console.log("saved to db successfully", newListing);
     req.flash("success", "New Listing created");
     res.redirect("/listings");
 }
+
+
 
 
 

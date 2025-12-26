@@ -9,7 +9,8 @@ const listingSchema = Joi.object({
     image: Joi.object({
         url: Joi.string().required(),
         filename: Joi.string().allow("", null)
-    })
+    }),
+    category: Joi.string().required(),
 })
 
 const reviewSchema = Joi.object({

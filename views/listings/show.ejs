@@ -5,12 +5,11 @@
             window.mapAPIKey = "<%= MAP_API_KEY %>";
             window.listingCoords = <%- JSON.stringify(detailListing.geometry.coordinates) %>;
             window.listingTitle = "<%= detailListing.title %>";
-            
+
         </script>
 
         <div class="row">
-            <div class="col-8 offset-3 mt-3">
-
+            <div class="col-8 offset-2 mt-3">
 
                 <h3>
                     <%= detailListing.title %>
@@ -19,7 +18,7 @@
             </div>
 
 
-            <div class="card col-6 offset-3 show-card">
+            <div class="card col-8 offset-2 show-card">
 
 
                 <img src="<%= detailListing.image.url %>" class="card-img-top show-img"
@@ -28,18 +27,24 @@
 
 
                     <p class="card-text"><i>
-                            Owned By <%= detailListing.owner.username %>
+                            Listed By <%= detailListing.owner.username %>
                         </i></p>
-
+                    
+                    <hr>
                     <p class="card-text">
+                        <b>Description:</b><br>
                         <%= detailListing.description %>
                     </p>
-                    <p class="card-text"> &#8377; <%= detailListing.price.toLocaleString("en-IN") %> / night </p>
+                    <p class="card-text"> <b>Price:</b> &nbsp; &#8377; <%= detailListing.price.toLocaleString("en-IN") %> / night </p>
                     <p class="card-text">
+                        <b>Located at: </b><br>
                         <%= detailListing.location %>
+                        <br>
+                        <%= detailListing.country %>
                     </p>
                     <p class="card-text">
-                        <%= detailListing.country %>
+                        <b>Category: </b><br>
+                        <%= detailListing.category %>
                     </p>
                 </div>
 
@@ -49,7 +54,7 @@
                 <div class="btns mt-3 ">
 
                     <a href="/listings/<%= detailListing._id %>/edit"
-                        class="btn btn-dark col-1 offset-3 submit-btn">Edit</a>
+                        class="btn btn-dark col-1 offset-2 submit-btn">Edit</a>
                     <form method="Post" action="/listings/<%= detailListing._id %>?_method=DELETE">
                         <button class="btn btn-dark offset-5">Delete</button>
                     </form>
@@ -60,7 +65,7 @@
 
                     <% if(currentUser) { %>
 
-                        <div class="col-8 offset-3 mt-3 mb-3">
+                        <div class="col-8 offset-2 mt-3 mb-3">
                             <hr>
                             <h4>Leave a Review</h4>
 
@@ -107,7 +112,7 @@
 
 
                             </form>
-                            
+
 
                         </div>
 
@@ -116,7 +121,7 @@
 
 
                             <% if(detailListing.reviews.length) { %>
-                                <div class="col-8 offset-3 mb-3">
+                                <div class="col-8 offset-2 mb-3">
                                     <div class="row">
                                         <hr>
 
@@ -155,7 +160,7 @@
                                 <% } %>
 
         </div>
-        <div class="col-6 offset-3 mt-3 mb-3">
+        <div class="col-8 offset-2 mt-3 mb-3">
             <hr>
             <h3>Where You'll Be</h3>
             <div id="map"></div>

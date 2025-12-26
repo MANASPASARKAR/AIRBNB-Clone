@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const listing = require("./listing.js")
 
 
-async function main(){
+async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
 
-main().then(()=>{
+main().then(() => {
   console.log("server connected to mongo");
 })
-.catch(err=> {console.log(err)});
+  .catch(err => { console.log(err) });
 
 
 const sampleListings = [
@@ -24,6 +24,7 @@ const sampleListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    category: "trending",
   },
   {
     title: "Modern Loft in Downtown",
@@ -36,6 +37,7 @@ const sampleListings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    category: "iconic cities",
   },
   {
     title: "Mountain Retreat",
@@ -48,6 +50,7 @@ const sampleListings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    category: "mountains",
   },
   {
     title: "Historic Villa in Tuscany",
@@ -60,6 +63,7 @@ const sampleListings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    category: "castles",
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -72,6 +76,7 @@ const sampleListings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    category: "camping",
   },
   {
     title: "Beachfront Paradise",
@@ -84,6 +89,7 @@ const sampleListings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    category: "trending",
   },
   {
     title: "Rustic Cabin by the Lake",
@@ -96,6 +102,7 @@ const sampleListings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    category: "camping",
   },
   {
     title: "Luxury Penthouse with City Views",
@@ -108,6 +115,7 @@ const sampleListings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    category: "iconic cities",
   },
   {
     title: "Ski-In/Ski-Out Chalet",
@@ -120,6 +128,7 @@ const sampleListings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    category: "mountains",
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -132,6 +141,7 @@ const sampleListings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    category: "forests",
   },
   {
     title: "Historic Canal House",
@@ -144,6 +154,7 @@ const sampleListings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    category: "iconic cities",
   },
   {
     title: "Private Island Retreat",
@@ -156,6 +167,7 @@ const sampleListings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    category: "other",
   },
   {
     title: "Charming Cottage in the Cotswolds",
@@ -168,6 +180,7 @@ const sampleListings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    category: "farms",
   },
   {
     title: "Historic Brownstone in Boston",
@@ -180,6 +193,7 @@ const sampleListings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    category: "castles",
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -192,6 +206,7 @@ const sampleListings = [
     price: 1800,
     location: "Bali",
     country: "Indonesia",
+    category: "amazing pools",
   },
   {
     title: "Mountain View Cabin in Banff",
@@ -204,6 +219,7 @@ const sampleListings = [
     price: 1500,
     location: "Banff",
     country: "Canada",
+    category: "mountains",
   },
   {
     title: "Art Deco Apartment in Miami",
@@ -216,6 +232,7 @@ const sampleListings = [
     price: 1600,
     location: "Miami",
     country: "United States",
+    category: "iconic cities",
   },
   {
     title: "Tropical Villa in Phuket",
@@ -228,6 +245,7 @@ const sampleListings = [
     price: 3000,
     location: "Phuket",
     country: "Thailand",
+    category: "amazing pools",
   },
   {
     title: "Historic Castle in Scotland",
@@ -240,6 +258,7 @@ const sampleListings = [
     price: 4000,
     location: "Scottish Highlands",
     country: "United Kingdom",
+    category: "castles",
   },
   {
     title: "Desert Oasis in Dubai",
@@ -252,6 +271,7 @@ const sampleListings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
+    category: "trending",
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -264,6 +284,7 @@ const sampleListings = [
     price: 1100,
     location: "Montana",
     country: "United States",
+    category: "rooms",
   },
   {
     title: "Beachfront Villa in Greece",
@@ -276,6 +297,7 @@ const sampleListings = [
     price: 2500,
     location: "Mykonos",
     country: "Greece",
+    category: "amazing pools",
   },
   {
     title: "Eco-Friendly Treehouse Retreat",
@@ -288,6 +310,7 @@ const sampleListings = [
     price: 750,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "forests",
   },
   {
     title: "Historic Cottage in Charleston",
@@ -300,6 +323,7 @@ const sampleListings = [
     price: 1600,
     location: "Charleston",
     country: "United States",
+    category: "castles",
   },
   {
     title: "Modern Apartment in Tokyo",
@@ -312,6 +336,7 @@ const sampleListings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
+    category: "iconic cities",
   },
   {
     title: "Lakefront Cabin in New Hampshire",
@@ -324,6 +349,7 @@ const sampleListings = [
     price: 1200,
     location: "New Hampshire",
     country: "United States",
+    category: "amazing pools",
   },
   {
     title: "Luxury Villa in the Maldives",
@@ -336,6 +362,7 @@ const sampleListings = [
     price: 6000,
     location: "Maldives",
     country: "Maldives",
+    category: "rooms",
   },
   {
     title: "Ski Chalet in Aspen",
@@ -348,6 +375,7 @@ const sampleListings = [
     price: 4000,
     location: "Aspen",
     country: "United States",
+    category: "iconic cities",
   },
   {
     title: "Secluded Beach House in Costa Rica",
@@ -360,20 +388,50 @@ const sampleListings = [
     price: 1800,
     location: "Costa Rica",
     country: "Costa Rica",
+    category: "amazing pools",
   },
 ];
 
-async function init(){
+const path = require("path");
+
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config({ path: path.join(__dirname, "../.env") });
+}
+
+const axios = require("axios");
+
+async function init() {
   await listing.deleteMany({});
-  sampleListings.forEach(listing => {
-    listing.owner = "69493b0696149e5e6b414055";
-  })
+
+  for (let obj of sampleListings) {
+    obj.owner = "69493b0696149e5e6b414055";
+
+    try {
+      const response = await axios.get(
+        `https://api.maptiler.com/geocoding/${encodeURIComponent(obj.location)}.json?key=${process.env.MAP_API_KEY}`
+      );
+
+      const geoData = response.data.features[0];
+      obj.geometry = {
+        type: "Point",
+        coordinates: geoData.geometry.coordinates
+      };
+    } catch (e) {
+      console.log(`Geocoding skipped for ${obj.location}:`, e.message);
+      // Fallback or ensure schema validation doesn't fail if required
+      obj.geometry = {
+        type: "Point",
+        coordinates: [0, 0]
+      };
+    }
+  }
+
   await listing.insertMany(sampleListings);
 }
 
-init().then(()=>{
+init().then(() => {
   console.log("initialised successfully");
 })
-.catch(err => {console.log(err)});
+  .catch(err => { console.log(err) });
 
 module.exports = { data: sampleListings };

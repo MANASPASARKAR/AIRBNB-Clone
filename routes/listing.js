@@ -19,6 +19,13 @@ router.route("/")
         wrapAsync(listingController.postListing)
     )
 
+
+//filter
+router.get("/filter", wrapAsync(listingController.filterListings));
+
+//search
+router.get("/search", wrapAsync(listingController.searchListings));
+
 //new listings route
 router.get("/new", isLoggedin, listingController.newListingForm);
 
