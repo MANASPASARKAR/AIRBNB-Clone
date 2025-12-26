@@ -71,7 +71,6 @@ module.exports.postListing = async (req, res, next) => {
 
     newListing.owner = req.user._id;
     await newListing.save();
-    console.log("saved to db successfully", newListing);
     req.flash("success", "New Listing created");
     res.redirect("/listings");
 }
@@ -105,7 +104,7 @@ module.exports.editListingForm = async (req, res) => {
     }
 
     let origImage = editListing.image.url;
-    origImage = origImage.replace("/upload", "/upload/w_250");
+    origImage = origImage.replace("/upload", "/upload/h_400,w_250");
     res.render("listings/edit.ejs", { editListing, origImage });
 }
 

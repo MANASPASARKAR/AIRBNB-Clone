@@ -27,7 +27,7 @@
 
                     <div class="mb-3">
                         <h6>Current Image</h6>
-                        <img src="<%= origImage %>" alt="<%= editListing.image.filename %>">
+                        <img src="<%= origImage %>" alt="<%= editListing.image.filename %>" style="width: 250px; height: 250px;">
                     </div>
 
                     <div class="mb-3">
@@ -66,6 +66,30 @@
                             required>
                         <div class="invalid-feedback">
                             Please Enter a valid location.
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="category" class="form-label">Category</label>
+                            <select name="category" class="form-select" required>
+                                <option value="" selected disabled>Change Category</option>
+                                <option value="trending">Trending</option>
+                                <option value="rooms">Rooms</option>
+                                <option value="iconic cities">Iconic Cities</option>
+                                <option value="mountains">Mountains</option>
+                                <option value="castles">Castles</option>
+                                <option value="amazing pools">Amazing Pools</option>
+                                <option value="camping">Camping</option>
+                                <option value="farms">Farms</option>
+                                <option value="forests">Forests</option>
+                                <option value="arctic">Arctic</option>
+                                <option value="houseboats">Houseboats</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid Category.
+                            </div>  
                         </div>
                     </div>
 

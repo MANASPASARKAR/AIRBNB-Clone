@@ -2,76 +2,80 @@
 
     <body>
         <!-- <h3 class="mb-3">All Listings</h3> -->
-        <div id="filters">
-
-            <div class="filter">
-                <a href="/listings/filter?category=trending">
-                <div>
-                    <i class="fa-solid fa-fire"></i>
+        <div id="filters-container">
+            <div id="filters">
+                <div class="filter">
+                    <a href="/listings/filter?category=trending">
+                        <div>
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <p>Trending</p>
+                    </a>
                 </div>
-                <p>Trending</p>
-                </a>
+                <div class="filter">
+                    <a href="/listings/filter?category=rooms">
+                        <div><i class="fa-solid fa-bed"></i></div>
+                        <p>rooms</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=iconic cities">
+                        <div><i class="fa-solid fa-mountain-city"></i></div>
+                        <p>Iconic cities</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=mountains">
+                        <div><i class="fa-solid fa-mountain"></i></div>
+                        <p>Mountains</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=castles">
+                        <div><i class="fa-brands fa-fort-awesome"></i></div>
+                        <p>Castles</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=amazing pools">
+                        <div><i class="fa-solid fa-person-swimming"></i></div>
+                        <p>Amazing pools</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=camping">
+                        <div><i class="fa-solid fa-campground"></i></div>
+                        <p>Camping</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=farms">
+                        <div><i class="fa-solid fa-cow"></i></div>
+                        <p>Farms</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=forests">
+                        <div><i class="fa-solid fa-tree"></i></div>
+                        <p>Forests</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=arctic">
+                        <div><i class="fa-solid fa-snowflake"></i></div>
+                        <p>Arctic</p>
+                    </a>
+                </div>
+                <div class="filter">
+                    <a href="/listings/filter?category=houseboats">
+                        <div><i class="fa-solid fa-ship"></i></div>
+                        <p>Houseboats</p>
+                    </a>
+                </div>
             </div>
-            <div class="filter">
-                <a href="/listings/filter?category=rooms">
-                <div><i class="fa-solid fa-bed"></i></div>
-                <p>rooms</p>
-                </a>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=iconic cities">
-                <div><i class="fa-solid fa-mountain-city"></i></div>
-                <p>Iconic cities</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=mountains">
-                <div><i class="fa-solid fa-mountain"></i></div>
-                <p>Mountains</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=castles">
-                <div><i class="fa-brands fa-fort-awesome"></i></div>
-                <p>Castles</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=amazing pools">
-                <div><i class="fa-solid fa-person-swimming"></i></div>
-                <p>Amazing pools</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=camping">
-                <div><i class="fa-solid fa-campground"></i></div>
-                <p>Camping</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=farms">
-                <div><i class="fa-solid fa-cow"></i></div>
-                <p>Farms</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=forests">
-                <div><i class="fa-solid fa-tree"></i></div>
-                <p>Forests</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=arctic">
-                <div><i class="fa-solid fa-snowflake"></i></div>
-                <p>Arctic</p>
-                </a>
-            </div>
-            <div class="filter">
-                <a href="/listings/filter?category=houseboats">
-                <div><i class="fa-solid fa-ship"></i></div>
-                <p>Houseboats</p>
-                </a>
+
+            <div class="scroll-arrow d-md-none">
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
 
             <div class="tax-switch">
@@ -95,7 +99,7 @@
                                     <%= listing.title %>
                                 </b><br>
                                 &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
-                                <i class="tax-info"> &nbsp;+18% GST</i>
+                                    <i class="tax-info"> &nbsp;+18% GST</i>
                             </p>
                         </div>
                     </div>
@@ -105,8 +109,6 @@
 
 
 
-        <!-- <form method="get" action="listings/new">
-    <button>New Listing</button>
-</form> -->
+        
 
     </body>

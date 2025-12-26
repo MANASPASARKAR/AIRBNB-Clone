@@ -29,18 +29,19 @@
                     <p class="card-text"><i>
                             Listed By <%= detailListing.owner.username %>
                         </i></p>
-                    
+
                     <hr>
                     <p class="card-text">
                         <b>Description:</b><br>
                         <%= detailListing.description %>
                     </p>
-                    <p class="card-text"> <b>Price:</b> &nbsp; &#8377; <%= detailListing.price.toLocaleString("en-IN") %> / night </p>
+                    <p class="card-text"> <b>Price:</b> &nbsp; &#8377; <%= detailListing.price.toLocaleString("en-IN")
+                            %> / night </p>
                     <p class="card-text">
                         <b>Located at: </b><br>
                         <%= detailListing.location %>
-                        <br>
-                        <%= detailListing.country %>
+                            <br>
+                            <%= detailListing.country %>
                     </p>
                     <p class="card-text">
                         <b>Category: </b><br>
@@ -51,15 +52,11 @@
             </div>
 
             <% if(currentUser && currentUser._id.equals(detailListing.owner._id)) { %>
-                <div class="btns mt-3 ">
-
-                    <a href="/listings/<%= detailListing._id %>/edit"
-                        class="btn btn-dark col-1 offset-2 submit-btn">Edit</a>
+                <div class="btns mt-3 offset-2 d-flex">
+                    <a href="/listings/<%= detailListing._id %>/edit" class="btn btn-dark submit-btn me-3">Edit</a>
                     <form method="Post" action="/listings/<%= detailListing._id %>?_method=DELETE">
-                        <button class="btn btn-dark offset-5">Delete</button>
+                        <button class="btn btn-dark">Delete</button>
                     </form>
-
-
                 </div>
                 <% } %>
 
