@@ -2,8 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 
-
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -14,7 +12,8 @@ const ExpressError = require("./utils/ExpressError.js")
 const port = 8090;
 
 
-const session = require("express-session")
+const session = require("express-session");
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 
 
@@ -41,13 +40,11 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-// mongoose.connect(process.env.MONGODB_URI)
-//   .then(() => console.log("MongoDB Atlas connected"))
-//   .catch(err => console.log(err));
 
 
+let dburl = process.env.MONGODB_URL;
 async function main() {
-    mongoose.connect("mongodb://127.0.0.1:27017/wanderlust")
+    await mongoose.connect(dburl)
 }
 
 main()
@@ -58,9 +55,21 @@ main()
 
 
 
+const store = MongoStore.create({
+    mongoUrl: dburl,
+    crypto: {
+        secret: process.env.SECRET
+    },  
+    touchAfter: 24 * 60 * 60,
+})
+
+store.on("error", (err) => {
+    console.log("SESSION STORE ERROR ", err);
+})
 
 const sessionOptions = {
-    secret: "MySuperSecretCode",
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -69,6 +78,7 @@ const sessionOptions = {
         httpOnly: true
     }
 }
+
 
 app.use(session(sessionOptions));
 app.use(flash());
