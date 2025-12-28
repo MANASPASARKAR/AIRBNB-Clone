@@ -57,13 +57,13 @@ body {
     align-items: space-evenly;
 }
 
-.footer-info-socials a{
+.footer-info-socials a {
     text-decoration: none !important;
     color: #222222 !important;
     opacity: 0.8 !important;
 }
 
-.footer-info-socials a:hover{
+.footer-info-socials a:hover {
     opacity: 1 !important;
     cursor: pointer;
 }
@@ -80,6 +80,10 @@ body {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+}
+
+.listing-img {
+    height: 20rem;
 }
 
 .card-body {
@@ -123,6 +127,9 @@ body {
 
 .show-img {
     height: 60vh;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .btns {
