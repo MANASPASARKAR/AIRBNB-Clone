@@ -104,6 +104,14 @@ app.get("/", (req, res) => {
     res.redirect("/listings");
 })
 
+app.get("/privacy", (req, res) => {
+    res.render("privacy.ejs")
+})
+
+app.get("/terms", (req, res) => {
+    res.render("terms.ejs")
+})
+
 // app.get("/demoUser", async (req, res) => {
 //     let fakeUser = new User({
 //         username: "demoUser",
