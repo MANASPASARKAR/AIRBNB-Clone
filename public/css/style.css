@@ -83,7 +83,7 @@ body {
 }
 
 .listing-img {
-    height: 20rem;
+    height: 20rem !important;
 }
 
 .card-body {
@@ -126,10 +126,10 @@ body {
 /* Show page */
 
 .show-img {
-    height: 60vh;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: 60vh !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
 }
 
 .btns {
